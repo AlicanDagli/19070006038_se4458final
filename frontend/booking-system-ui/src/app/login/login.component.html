@@ -1,0 +1,37 @@
+<div class="container mx-auto px-40 py-40">
+  <div class="bg-white shadow-md rounded-md px-8 pt-6 pb-8 mb-4 flex flex-col">
+    <div class="flex justify-center h-1/2">
+      <div class=" mt-12">
+        <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+          <div class="relative mt-2 rounded-md shadow-sm">
+            <label>Email</label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              class="block mt-2 w-full rounded-md border-0 py-1.5 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-blue-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6"
+              placeholder="example@gmail.com"
+              formControlName="email"
+            />
+          </div>
+          <div class="relative mt-8 rounded-md shadow-sm">
+            <label>Parola</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              class="block mt-2 w-full rounded-md border-0 py-1.5 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-blue-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6"
+              placeholder="Password"
+              formControlName="password"
+            />
+          </div>
+          <div class="flex justify-center mt-8">
+            <button class="bg-blue-600 text-white p-2 rounded-md w-1/2 hover:bg-white hover:border-blue-600 hover:border-2 hover:text-blue-600" (click)="signIn()">
+              Giriş Yap
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="mt-20 ml-20">
+  <div class="text-2xl">Nereye?</div>
+  <div class="grid grid-cols-5 mt-12 gap-4">
+    <div>
+      <input
+        type="text"
+        placeholder="Search..."
+        class="block w-full rounded-md p-2 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-sky-500  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        [(ngModel)]="searchTerm"
+        (input)="filterOptions()"
+      />
+      <div *ngIf="searchTerm" class="absolute w-96 mt-1 bg-white border border-sky-500 rounded shadow-lg">
+        <div *ngFor="let location of locations" class="p-2 hover:bg-gray-200" (click)="selectLocation(location)">
+          {{ location.country }}, {{ location.city }}, {{ location.district }}
+        </div>
+      </div>
+    </div>
+    <div>
+      <input
+        type="date"
+        id="checkInDate"
+        class="lock w-full p-2 border border-sky-500 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        [(ngModel)]="checkInDate"
+      />
+    </div>
+    <div>
+      <input
+        type="date"
+        id="checkOutDate"
+        class="lock w-full p-2 border border-sky-500 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        [(ngModel)]="checkOutDate"
+      />
+    </div>
+    <div>
+      <select id="people" name="sport-type-select" (change)="onSelectRoomCapacity($event)" class="block w-96 rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-sky-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+        <option>1 Kişi</option>
+        <option>2 Kişi</option>
+        <option>3 Kişi</option>
+        <option>4 Kişi</option>
+      </select>
+    </div>
+    <div>
+      <button class="bg-sky-500 rounded-md text-white p-2 w-24 hover:bg-sky-700" (click)="search()">Ara</button>
+    </div>
+  </div>
+</div>
+
+
+<div *ngFor="let room of rooms" class="container mx-auto px-32 mt-12">
+      <div class="grid grid-cols-4 rounded-md bg-white mt-4 gap-8 shadow-xl">
+        <div class="py-20 px-4">
+          <img src="{{room.hotel.imageUrl}}" class="rounded-md">
+        </div>
+        <div class="grid col-span-3 grid-rows-2">
+          <div class="grid justify-items-start text-2xl mt-4">{{room.hotel.name}}</div>
+          <div class="grid gap-2 py-2 px-4">
+            <div *ngIf="loggedIn; else elseBlock"><div class="text-green-400">{{room.price}} TL</div></div>
+            <ng-template #elseBlock><div class="text-green-400">{{+room.price * 0.9}} TL</div></ng-template>
+            <div class="text-sm text-gray-400">{{room.checkInDate.split(" ")[0]}} - {{room.checkOutDate.split(" ")[0]}}</div>
+            <div class="text-sm">{{room.roomCapacity}} Kişi</div>
+            <button class="bg-sky-500 rounded-md text-white p-2 hover:bg-sky-700" (click)="booking(room.id, room.checkInDate.split(' ')[0], room.checkOutDate.split(' ')[0])">Rezarvasyon Yap</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
